@@ -18,7 +18,7 @@ python predict.py path/to/audio.wav
 → Prediction: distress (confidence: 0.87)
 ```
 
-That's it. No dashboard, no cloud service — a single script anyone can run to see the model work.
+![AffectCare pipeline: raw audio → spectrogram → CNN+LSTM → alert](results/pipeline_diagram.svg)
 
 ---
 
@@ -75,10 +75,10 @@ Final model, threshold = 0.15, evaluated on a held-out 20% test split (160 files
 
 ~800 audio clips, balanced 50/50 across two classes:
 
-| Class      | Source                                                                                                                                                                                                                  |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `distress` | Human scream / distress vocalization clips sourced from a Kaggle audio dataset ([Human Scream Dataset](https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset)|
-| `normal`   | [ESC-50: Dataset for Environmental Sound Classification](https://github.com/karolpiczak/ESC-50) (ambient/household/urban sounds) + supplementary calm speech clips                                                      |
+| Class      | Source                                                                                                                                                                             |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `distress` | Human scream / distress vocalization clips sourced from a Kaggle audio dataset [Human Scream Dataset](https://www.kaggle.com/datasets/whats2000/human-screaming-detection-dataset) |
+| `normal`   | [ESC-50: Dataset for Environmental Sound Classification](https://github.com/karolpiczak/ESC-50) (ambient/household/urban sounds) + supplementary calm speech clips                 |
 
 ### A real finding, not a footnote: the siren confusion
 
@@ -129,7 +129,7 @@ AffectCare/
 ## ⚙️ Installation & usage
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/imgigin2003/AffectCare.git
 cd AffectCare
 python3 -m venv venv
 source venv/bin/activate      # Windows: venv\Scripts\activate

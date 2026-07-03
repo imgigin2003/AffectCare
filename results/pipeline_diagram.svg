@@ -1,0 +1,99 @@
+<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1200" height="620" fill="#ffffff"/>
+
+  <!-- ===== STEP 1: RAW AUDIO ===== -->
+  <text x="40" y="45" font-size="24" font-weight="700" fill="#1a1a2e">Step 1: raw audio</text>
+  <text x="40" y="70" font-size="15" fill="#6b7280">millions of pressure values per second</text>
+
+  <rect x="40" y="90" width="480" height="220" rx="12" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+  <polyline points="70,220 100,260 130,180 160,240 190,150 220,255 250,200 280,120 310,230 340,270 370,190 400,235 430,270 460,270 490,270"
+    fill="none" stroke="#5b4fcf" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="70" y="300" font-size="14" fill="#6b7280" font-family="monospace">[0.002, -0.04, 0.018, ...]</text>
+
+  <!-- Arrow 1 -->
+  <line x1="540" y1="200" x2="610" y2="200" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="575" y="185" font-size="13" fill="#6b7280" text-anchor="middle">FFT</text>
+
+  <!-- ===== STEP 2: SPECTROGRAM ===== -->
+  <text x="630" y="45" font-size="24" font-weight="700" fill="#1a1a2e">Step 2: spectrogram</text>
+  <text x="630" y="70" font-size="15" fill="#6b7280">a 2D image — now the CNN can see patterns</text>
+
+  <!-- Spectrogram box -->
+  <rect x="630" y="90" width="530" height="180" rx="12" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
+
+  <!-- Frequency axis label -->
+  <text x="615" y="120" font-size="12" fill="#6b7280" text-anchor="end">high</text>
+  <text x="615" y="180" font-size="12" fill="#6b7280" text-anchor="end">freq</text>
+  <text x="615" y="250" font-size="12" fill="#6b7280" text-anchor="end">low</text>
+
+  <!-- Heatmap grid: 3 freq rows x 5 time columns, varied energy -->
+  <!-- Row 1 (high freq) -->
+  <rect x="640" y="100" width="100" height="53" fill="#e8e5fb"/>
+  <rect x="740" y="100" width="100" height="53" fill="#d4cdf7"/>
+  <rect x="840" y="100" width="100" height="53" fill="#f0edfc"/>
+  <rect x="940" y="100" width="100" height="53" fill="#f5f3fd"/>
+  <rect x="1040" y="100" width="100" height="53" fill="#efecfc"/>
+  <!-- Row 2 (mid freq) - scream burst lives here -->
+  <rect x="640" y="153" width="100" height="53" fill="#c4b8f3"/>
+  <rect x="740" y="153" width="100" height="53" fill="#2e1f8f"/>
+  <rect x="840" y="153" width="100" height="53" fill="#5b4fcf"/>
+  <rect x="940" y="153" width="100" height="53" fill="#c4b8f3"/>
+  <rect x="1040" y="153" width="100" height="53" fill="#d4cdf7"/>
+  <!-- Row 3 (low freq) -->
+  <rect x="640" y="206" width="100" height="53" fill="#a595ea"/>
+  <rect x="740" y="206" width="100" height="53" fill="#8b7ae0"/>
+  <rect x="840" y="206" width="100" height="53" fill="#9c8ce5"/>
+  <rect x="940" y="206" width="100" height="53" fill="#b3a5ef"/>
+  <rect x="1040" y="206" width="100" height="53" fill="#c4b8f3"/>
+
+  <!-- time axis -->
+  <text x="895" y="290" font-size="13" fill="#6b7280" text-anchor="middle">time →</text>
+
+  <!-- Scream burst callout: sits ABOVE the box, pointing down with a leader line - no overlap -->
+  <line x1="790" y1="315" x2="790" y2="270" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="700" y="315" width="180" height="26" rx="6" fill="#fdecea" stroke="#c0392b" stroke-width="1"/>
+  <text x="790" y="332" font-size="13" font-weight="600" fill="#c0392b" text-anchor="middle">scream burst</text>
+
+  <!-- Legend -->
+  <rect x="640" y="360" width="18" height="18" rx="3" fill="#2e1f8f"/>
+  <text x="665" y="374" font-size="13" fill="#374151">high energy</text>
+  <rect x="800" y="360" width="18" height="18" rx="3" fill="#f0edfc" stroke="#d1d5db"/>
+  <text x="825" y="374" font-size="13" fill="#374151">low energy</text>
+
+  <!-- Arrow marker def -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <!-- Divider -->
+  <line x1="40" y1="430" x2="1160" y2="430" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- ===== STEP 3: PIPELINE ===== -->
+  <text x="40" y="470" font-size="24" font-weight="700" fill="#1a1a2e">Step 3: CNN + LSTM reads the sequence</text>
+  <text x="40" y="495" font-size="15" fill="#6b7280">CNN finds texture in each frame; LSTM tracks how it changes over time</text>
+
+  <!-- Pipeline boxes -->
+  <rect x="40" y="520" width="230" height="80" rx="10" fill="#eef0ff" stroke="#5b4fcf" stroke-width="1.5"/>
+  <text x="155" y="555" font-size="17" font-weight="700" fill="#1a1a2e" text-anchor="middle">Spectrogram</text>
+  <text x="155" y="577" font-size="12" fill="#6b7280" text-anchor="middle">image input</text>
+
+  <line x1="280" y1="560" x2="330" y2="560" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="340" y="520" width="230" height="80" rx="10" fill="#e6f7f0" stroke="#1a9c6f" stroke-width="1.5"/>
+  <text x="455" y="555" font-size="17" font-weight="700" fill="#1a1a2e" text-anchor="middle">CNN</text>
+  <text x="455" y="577" font-size="12" fill="#6b7280" text-anchor="middle">detects spatial texture</text>
+
+  <line x1="580" y1="560" x2="630" y2="560" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="640" y="520" width="230" height="80" rx="10" fill="#fdf3e3" stroke="#d99a1f" stroke-width="1.5"/>
+  <text x="755" y="555" font-size="17" font-weight="700" fill="#1a1a2e" text-anchor="middle">LSTM</text>
+  <text x="755" y="577" font-size="12" fill="#6b7280" text-anchor="middle">reads texture over time</text>
+
+  <line x1="880" y1="560" x2="930" y2="560" stroke="#9ca3af" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="940" y="520" width="220" height="80" rx="10" fill="#fdecea" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="1050" y="555" font-size="17" font-weight="700" fill="#1a1a2e" text-anchor="middle">Alert?</text>
+  <text x="1050" y="577" font-size="12" fill="#6b7280" text-anchor="middle">distress / normal</text>
+</svg>
