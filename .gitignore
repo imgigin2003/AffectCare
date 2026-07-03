@@ -1,0 +1,14 @@
+# Environments
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Raw dataset — large, regenerate via preprocessing.py
+dataset/
+
+# Processed features — large binary, regenerate via preprocessing.py
+data/processed/*.npy
+.DS_Store
