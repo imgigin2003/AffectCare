@@ -79,5 +79,14 @@ if __name__ == "__main__":
     # Step 14 -> Run the prediction
     label, probability = predict(filepath, model, scaler)
 
-    # Step 15 -> Print the result, matching the plan's exact desired format
-    print(f"→ Prediction: {label} (confidence: {probability * 100 :.2f})%")
+    # Step 15 -> Print the result
+    # The model returns P(distress). Show a clean verdict on top, then both
+    # percentages underneath so it's always clear how the two classes split.
+    distress_pct = probability * 100
+    normal_pct = (1 - probability) * 100
+
+    # Verdict shown to the user = whichever class the model leans toward (higher %)
+    verdict = "Distress" if probability >= 0.5 else "Normal/Safe"
+
+    print(f"→ Prediction: {verdict}")
+    print(f"   {distress_pct:.2f}% distress · {normal_pct:.2f}% normal")
